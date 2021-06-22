@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators'
-import { AuthToken } from "../services/AuthToken";
+import { AuthToken } from "../services/authToken";
 import { BaseService } from "../services/base_service";
 import { HttpSettingsService } from "../services/httpServiceSettings";
 import { SessionService } from "../services/SessionService";

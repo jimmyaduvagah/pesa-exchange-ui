@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
 import { SettingsService } from './SettingsService';
 import { AuthToken } from './authToken';
 import { Router } from '@angular/router';

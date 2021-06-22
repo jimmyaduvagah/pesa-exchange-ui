@@ -18,16 +18,12 @@ export class HttpSettingsService {
     private domain;
     private baseUrl;
     
-
-
     constructor( private _sessionService: SessionService, private _settings: SettingsService )
     {
         this.protocol = _settings.getProtocol();
         this.domain = _settings.getDomain();
         this.baseUrl = _settings.getBaseUrl();
     }
-
-    
 
     public getHeaders() {
         let token = this._sessionService.getToken();
