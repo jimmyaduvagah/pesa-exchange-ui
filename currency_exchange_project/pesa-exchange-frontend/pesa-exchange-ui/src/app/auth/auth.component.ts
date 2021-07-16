@@ -12,29 +12,30 @@ import { Observable } from 'rxjs';
 	styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-	public username: any;
+	public email: any;
 	public password: any;
 	public isAuthenticated: boolean = false;
 
 	constructor(private authService: AuthService,
 		private _sessionService: SessionService, public router: Router
 	) {
-		if (typeof this._sessionService.user !== 'undefined') {
-			this.isAuthenticated = this._sessionService.isLoggedIn();
-		} else {
-			this._sessionService.userObservable.subscribe((res) => {
-				this.isAuthenticated = this._sessionService.isLoggedIn();
-			});
-		}
+		// if (typeof this._sessionService.user !== 'undefined') {
+		// 	this.isAuthenticated = this._sessionService.isLoggedIn();
+		// } else {
+		// 	this._sessionService.userObservable.subscribe((res) => {
+		// 		this.isAuthenticated = this._sessionService.isLoggedIn();
+		// 	});
+		// }
 	}
 	ngOnInit(): void {
 	}
 
-
-
 	signIn() {
+		console.log(this.password)
 		this.authService.login(JSON.stringify(
-			{ "username": this.username, "password": this.password })).subscribe();
+			{ "email": this.email,
+			  "username": "jimmy8.aduvagah@gmail.com",
+			  "password": this.password })).subscribe();
 	}
 
 	signOut() {

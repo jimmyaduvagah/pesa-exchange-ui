@@ -1,23 +1,25 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
+
 import { map } from 'rxjs/operators'
+import { Token, User } from "../base-model/model";
 import { AuthToken } from "../services/authToken";
 import { BaseService } from "../services/base_service";
 import { HttpSettingsService } from "../services/httpServiceSettings";
 import { SessionService } from "../services/SessionService";
 
 
-export interface Token {
-    token: string;
-    user: any;
-  }
-
-
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class AuthService extends BaseService {
-    public _basePath = 'api-token-auth/';
-    // public _basePath = 'api-token-auth/';
+    exampleUser: User = new User(
+        "jimmy", "jimmy", "jimmy12@gmail.com", "asante$4")
+
+    public _basePath = 'api/token/';
+    private timer?: Subscription;
+    private _user = new BehaviorSubject<User>(this.exampleUser);
 
     constructor(public http: HttpClient,
                 public _httpSettings: HttpSettingsService,
@@ -31,10 +33,8 @@ export class AuthService extends BaseService {
     public login(data: Object): Observable<any>{
         return this.http.post<Token>(this.getUrl(), data, this._httpSettings.getHeaders()).pipe(
             map(res => {
-                let tkn = res.token;
-                let user = res.user;
-                this._authToken.setToken(tkn)
-                this._sesstionService.setUser(user)
+                this._authToken.setToken(res)
+                this._sesstionService.setUser(this.exampleUser)
                 this._sesstionService.actionLoggedIn();
                 return res
             })
@@ -46,4 +46,15 @@ export class AuthService extends BaseService {
         this._sesstionService.logout();
         return this.http.post('http://127.0.0.1:8000/' + 'accounts/logout/',{})
     }
+
+    private getTokenRemainingTime() {
+        const accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+          return 0;
+        }
+        const jwtToken = JSON.parse(atob(accessToken.split('.')[1]));
+        const expires = new Date(jwtToken.exp * 1000);
+        return expires.getTime() - Date.now();
+      }
+    
 }

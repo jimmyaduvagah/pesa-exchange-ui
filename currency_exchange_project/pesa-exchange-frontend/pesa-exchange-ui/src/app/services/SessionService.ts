@@ -11,9 +11,6 @@ export class SessionService {
     public userObservable: EventEmitter<any> = new EventEmitter();
     public user?: User;
 
-    private _basePath = 'api-token-auth/';
-    private _apiVersion = '1';
-
     constructor(private _settings: SettingsService,
                 private _authToken: AuthToken,
                 private _router: Router,
@@ -34,7 +31,7 @@ export class SessionService {
         this.authStatus.emit({
             'authenticated': this.isLoggedIn()
         });
-        this._router.navigate(['/dashboard']);
+        this._router.navigate(['/profile2']);
     }
 
     public actionLoggedOut() {

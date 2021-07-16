@@ -26,11 +26,11 @@ export class HttpSettingsService {
     }
 
     public getHeaders() {
-        let token = this._sessionService.getToken();
-        if (token != null) {
-            httpOptions.headers =  httpOptions.headers.set(
-            'Authorization', 'Token ' + token);
-        }
+        // let token = this._sessionService.getToken();
+        // if (token != null) {
+        //     httpOptions.headers =  httpOptions.headers.set(
+        //     'Authorization', 'Token ' + token);
+        // }
         return httpOptions
     }
 
