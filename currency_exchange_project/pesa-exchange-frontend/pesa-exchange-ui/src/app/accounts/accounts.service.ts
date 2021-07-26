@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators'
-import { LoginResult, User } from "../base-model/model";
+import { LoginUser, User } from "../base-model/model";
 import { AuthToken } from "../services/authToken";
 import { BaseService } from "../services/base_service";
 import { HttpSettingsService } from "../services/httpServiceSettings";
@@ -20,7 +20,7 @@ export interface Token {
  })
 export class AccountService extends BaseService {
     public _basePath = 'api/v1/accounts/register/';
-    private userLogin?: LoginResult
+    private userLogin?: LoginUser
     public user?: User;
     constructor(public http: HttpClient,
                 public _httpSettings: HttpSettingsService,

@@ -39,6 +39,6 @@ export class AuthComponent implements OnInit {
 	}
 
 	signOut() {
-		this.authService.logout().subscribe();
+		this.authService.logout();
 	}
 }

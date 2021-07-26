@@ -16,15 +16,15 @@ export class User {
 
 
 
-export interface LoginResult {
-    username?: string;
+export interface LoginUser {
+    firstName?: string;
+    lastName?: string;
     email?: string;
-    token?: string;
-    accessToken?: string;
-    refreshToken?: string;
+    access?: string;
+    refresh?: string;
 }
 
 export interface Token {
-    accessToken: string;
-    refreshToken: any;
+    access: string;
+    refresh: string;
   }

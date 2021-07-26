@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 import { Profile2Component } from './profile2/profile2.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AuthTokenInterceptor } from './services/auth_interceptor';
+import { ProfileService } from './profile2/profile.service';
+import { UnauthorizedInterceptor } from './services/unauthorized.interceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { AuthTokenInterceptor } from './services/auth_interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthTokenInterceptor, multi: true },
-    AuthToken, AuthService, HttpSettingsService,
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true},
+    AuthToken, AuthService, HttpSettingsService, ProfileService, 
     SessionService, SettingsService, BaseService, AccountService],
   bootstrap: [AppComponent]
 })

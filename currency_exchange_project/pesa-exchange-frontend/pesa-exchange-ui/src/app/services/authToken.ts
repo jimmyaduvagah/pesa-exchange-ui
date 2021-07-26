@@ -14,8 +14,8 @@ export class AuthToken {
     }
 
     public setToken(token: Token) {
-        localStorage.setItem('access-token', token.accessToken);
-        localStorage.setItem('refresh-token', token.refreshToken);
+        localStorage.setItem('access-token', token.access);
+        localStorage.setItem('refresh-token', token.refresh);
         localStorage.setItem('login-event', 'login' + Math.random());
     }
 
